@@ -10,6 +10,7 @@ const Cart = () => {
 
   useEffect(() => {
     const tempData = [];
+    
 
     // Map through cartItems to extract relevant data
     Object.entries(cartItems).forEach(([productId, sizes]) => {
@@ -25,7 +26,7 @@ const Cart = () => {
     });
 
     setCartData(tempData);
-  }, [cartItems]);
+  }, [cartItems,products]);
 
   // Add a check to ensure cartData is properly populated before rendering
   if (cartData.length === 0) {

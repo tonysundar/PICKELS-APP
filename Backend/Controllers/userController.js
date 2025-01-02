@@ -16,7 +16,7 @@ const loginUser = async (req,res) => {
          const user = await userModel.findOne({email:email});
 
          if(!user){
-            return res.status(400).json({success:false,message:"User not found"});
+            return res.status(200).json({success:false,message:"User not found"});
          }
           
          const isMatch = await bycrpt.compare(password,user.password);
@@ -26,7 +26,7 @@ const loginUser = async (req,res) => {
             res.json({success:true,token:token});
          }
          else{
-            res.status(400).json({success:false,message:"Invalid credentials"});
+            res.status(200).json({success:false,message:"Invalid credentials"});
          }
          
       } catch (error) {
@@ -38,7 +38,7 @@ const loginUser = async (req,res) => {
 
 const registerUser = async (req,res) => {
    try {
-
+      console.log(req.body)
       const {name,email,password} = req.body;
 
       // Check if the user already exists or not
@@ -67,10 +67,10 @@ const registerUser = async (req,res) => {
 
       //saving the user to the database
       const user = await newUser.save();
-
+      console.log(user);
       //sending the response
       const token = createToken(user._id);
-      res.json({success:true,token:token})
+      res.status(200).json({success:true,token:token})
       
    } catch (error) {
       console.log(error);

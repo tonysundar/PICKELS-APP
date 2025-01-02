@@ -14,7 +14,7 @@ const List = ({ token }) => {
       const response = await axios.get(backendUrl + '/api/product/list')
       
       if (response.data.products) {
-        console.log(response.data.products)
+        
         setData(response.data.products)
       }
       else {
@@ -28,9 +28,7 @@ const List = ({ token }) => {
   }
 
   const removeProduct = async (id) => {
-    console.log(backendUrl);
-    console.log(id)
-    console.log(token)
+   
     try {
       const response = await axios.post(backendUrl + '/api/product/remove', { id }, { headers: { token } })
 
@@ -56,7 +54,7 @@ const List = ({ token }) => {
 
   return (
     <>
-      <p className='mb-2'>ALL Picles List</p>
+      <p className='mb-2'>ALL Pickles List</p>
       <div className='flex flex-col gap-2'>
         <div className='hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center py-1 px-2 border bg-gray-100 text-sm'>
           <b>Image</b>
@@ -69,12 +67,12 @@ const List = ({ token }) => {
           data.length > 0 &&
           data.map((item, index) => {
 
-            { console.log(item) }
+            
             return <div className='grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-1 px-2 border text-sm' key={index}>
               <img src={item.images[0]} alt=''/>
               <p>{item.name}</p>
               <p>{item.category}</p>
-              <p>{currency}{item.price}</p>
+              <p className='price'>{currency}{item.price.join(",")}</p>
               <p onClick={() => removeProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg'>X</p>
             </div>
           })

@@ -2,17 +2,20 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { set } from "mongoose";
+
 
 export const ShopeContext = createContext();
 
 const ShopeContextProvider = (props) => {
     const currency = '₹';
     const delivery_fee = 15;
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [search,setSearch] = useState("");
     const [showSearch,setShowsearch] = useState(false);
     const [cartItems, setCartItems]=useState({});
     const [products,setProducts] = useState([]);
+    const [token,setToken] = useState("");
     const navigate = useNavigate();
 
     const addToCart = async (itemId,size) =>{
@@ -35,6 +38,18 @@ const ShopeContextProvider = (props) => {
                cartData[itemId][size] = 1;
                }
                setCartItems(cartData);
+            
+               if(token){
+                try {
+
+                    await axios.post("http://localhost:4000" + '/api/cart/add',{itemId,size},{headers:{token}})
+                    
+                } catch (error) {
+                    console.log(error)
+                    toast.error(error.message)
+                }
+               }
+
             }
         
     const getCartAmount = () => {
@@ -79,6 +94,14 @@ const ShopeContextProvider = (props) => {
              cartData[itemId][size]=quantity;
 
              setCartItems(cartData);
+             if(token){
+                try {
+                    await axios.post("http://localhost:4000" + '/api/cart/update',{itemId,size,quantity},{headers:{token}})
+                } catch (error) {
+                    console.log(error)
+                    toast.error(error.message)
+                }
+             }
     }
 
      const getProductsData = async () => {
@@ -99,8 +122,27 @@ const ShopeContextProvider = (props) => {
 
      }
 
+     const getUserCart = async (token) => {
+            try {
+              const response =  await axios.post("http://localhost:4000" + '/api/cart/get',{}, {headers:{token}})
+                if(response.data.success){
+                    setCartItems(response.data.cartData)
+                }
+            } catch (error) {
+                console.log(error)
+                toast.error(error.message)
+            }
+     }
+
      useEffect(()=>{
         getProductsData();
+     },[])
+
+     useEffect(()=>{
+          if(!token && localStorage.getItem('token')){
+              setToken(localStorage.getItem('token'))
+              getUserCart(localStorage.getItem('token'))
+          }
      },[])
 
     const value = {
@@ -117,7 +159,8 @@ const ShopeContextProvider = (props) => {
         updateQuantity,
          getCartAmount,
          navigate,
-         backendUrl
+         backendUrl,
+         setToken,token
     }
     return (
         <ShopeContext.Provider value={value}>

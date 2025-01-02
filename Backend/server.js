@@ -5,6 +5,7 @@ import connectDB from './config/mangodb.js';
 import connectCloudinary from './config/cloudinary.js';
 import userRouter from './routes/userRoute.js';
 import ProductRouter from './routes/productRoute.js';
+import cartRouter from './routes/cartRoute.js';
 
  
 //App Config
@@ -20,6 +21,7 @@ app.use(cors({origin:"*"}));
 //API endpoints
 app.use('/api/user',userRouter);
 app.use('/api/product',ProductRouter);
+app.use('/api/cart',cartRouter);
 
 
 
