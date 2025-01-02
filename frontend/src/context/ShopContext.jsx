@@ -108,7 +108,7 @@ const ShopeContextProvider = (props) => {
         try {
             
             const response = await axios.get("http://localhost:4000" + '/api/product/list')
-            console.log(response)
+         
              if(response.data.success){
                
                 setProducts(response.data.products)

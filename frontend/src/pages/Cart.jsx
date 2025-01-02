@@ -10,7 +10,10 @@ const Cart = () => {
 
   useEffect(() => {
     const tempData = [];
-    
+
+    // Log to verify cartItems and products
+    console.log("Cart items:", cartItems);
+    console.log("Products list:", products);
 
     // Map through cartItems to extract relevant data
     Object.entries(cartItems).forEach(([productId, sizes]) => {
@@ -26,9 +29,8 @@ const Cart = () => {
     });
 
     setCartData(tempData);
-  }, [cartItems,products]);
+  }, [cartItems, products]);
 
-  // Add a check to ensure cartData is properly populated before rendering
   if (cartData.length === 0) {
     return <div>Your cart is empty!</div>; // Better fallback UI for empty cart
   }
@@ -43,9 +45,18 @@ const Cart = () => {
           cartData.map((item, index) => {
             // Find the corresponding product data
             const productData = products.find((product) => product._id === item.id);
-            if (!productData) return null; // Skip if product not found
+            
+            if (!productData) {
+              console.log(`Product not found: ${item.id}`); // Log missing product
+              return null; // Skip if product not found
+            }
 
             const priceIndex = productData.sizes.indexOf(item.size);
+            if (priceIndex === -1) {
+              console.log(`Size not found for product ${item.id}: ${item.size}`);
+              return null; // Skip if size not found
+            }
+
             const selectedPrice = productData.price[priceIndex] || productData.price[0];
 
             return (

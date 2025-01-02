@@ -10,7 +10,7 @@ const Collection = () => {
 
   useEffect(() => {
     let filtered = products;
-    console.log(filtered);  // Debug: Check the raw product list
+  
 
     // Filter by category
     if (selectedCategory !== 'ALL') {
