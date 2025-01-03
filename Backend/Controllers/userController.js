@@ -1,7 +1,8 @@
 import validator from 'validator';
 import bycrpt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import userModel from '../Models/userModel.js';
+import userModel from '../models/userModel.js';
+
 
 const createToken = (id) => {
    return jwt.sign({id},process.env.JWT_SECRET
@@ -38,7 +39,6 @@ const loginUser = async (req,res) => {
 
 const registerUser = async (req,res) => {
    try {
-      console.log(req.body)
       const {name,email,password} = req.body;
 
       // Check if the user already exists or not
