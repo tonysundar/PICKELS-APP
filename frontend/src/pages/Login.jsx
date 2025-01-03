@@ -18,7 +18,7 @@ const Login = () => {
 
       if (currentState === 'Sign Up') {
         console.log("Attempting to sign up...");
-        response = await axios.post("http://localhost:4000/api/user/register", { name, email, password });
+        response = await axios.post("https://pickels-app-1.onrender.com/api/user/register", { name, email, password });
 
 
         if (response.data.success) {
@@ -28,7 +28,7 @@ const Login = () => {
           toast.error(response.data);
         }
       } else {
-        response = await axios.post("http://localhost:4000/api/user/login", { email, password });
+        response = await axios.post("https://pickels-app-1.onrender.com/api/user/login", { email, password });
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);

@@ -14,7 +14,7 @@ const Order = () => {
         return; // Don't proceed if there's no token
       }
 
-      const response = await axios.post(`http://localhost:4000/api/order/userorders`, {}, {
+      const response = await axios.post(`https://pickels-app-1.onrender.com/api/order/userorders`, {}, {
         headers: { token }
       });
 

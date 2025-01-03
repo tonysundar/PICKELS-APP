@@ -42,7 +42,7 @@ const ShopeContextProvider = (props) => {
                if(token){
                 try {
 
-                    await axios.post("http://localhost:4000" + '/api/cart/add',{itemId,size},{headers:{token}})
+                    await axios.post("https://pickels-app-1.onrender.com" + '/api/cart/add',{itemId,size},{headers:{token}})
                     
                 } catch (error) {
                     console.log(error)
@@ -96,7 +96,7 @@ const ShopeContextProvider = (props) => {
              setCartItems(cartData);
              if(token){
                 try {
-                    await axios.post("http://localhost:4000" + '/api/cart/update',{itemId,size,quantity},{headers:{token}})
+                    await axios.post("https://pickels-app-1.onrender.com" + '/api/cart/update',{itemId,size,quantity},{headers:{token}})
                 } catch (error) {
                     console.log(error)
                     toast.error(error.message)
@@ -107,7 +107,7 @@ const ShopeContextProvider = (props) => {
      const getProductsData = async () => {
         try {
             
-            const response = await axios.get("http://localhost:4000" + '/api/product/list')
+            const response = await axios.get("https://pickels-app-1.onrender.com" + '/api/product/list')
          
              if(response.data.success){
                
@@ -124,7 +124,7 @@ const ShopeContextProvider = (props) => {
 
      const getUserCart = async (token) => {
             try {
-              const response =  await axios.post("http://localhost:4000" + '/api/cart/get',{}, {headers:{token}})
+              const response =  await axios.post("https://pickels-app-1.onrender.com" + '/api/cart/get',{}, {headers:{token}})
                 if(response.data.success){
                     setCartItems(response.data.cartData)
                 }
