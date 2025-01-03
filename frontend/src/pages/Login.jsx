@@ -15,17 +15,17 @@ const Login = () => {
     event.preventDefault();
     try {
       let response; // Declare response here
-      
+
       if (currentState === 'Sign Up') {
         console.log("Attempting to sign up...");
         response = await axios.post("http://localhost:4000/api/user/register", { name, email, password });
-    
+
 
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
         } else {
-          toast.error(response.data.message);
+          toast.error(response.data);
         }
       } else {
         response = await axios.post("http://localhost:4000/api/user/login", { email, password });
@@ -39,15 +39,16 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error.response.data.message
+      );
     }
   };
 
-useEffect(()=>{
-  if(token){
-    navigate('/')
-  }
-},[token])
+  useEffect(() => {
+    if (token) {
+      navigate('/')
+    }
+  }, [token])
 
   return (
 
