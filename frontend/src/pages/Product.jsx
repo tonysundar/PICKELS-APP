@@ -68,7 +68,7 @@ const Product = () => {
                 <button
                   onClick={() => handleSizeChange(item)}
                   className={`border py-2 px-4 bg-gray-100 ${
-                    item === size ? "border-green-300" : ""
+                    item === size ? "border-green-600" : ""
                   }`}
                   key={index}
                 >
@@ -84,7 +84,7 @@ const Product = () => {
             // Disable button if no size is selected
             className={`px-8 py-3 ${
               size
-                ? "bg-green-300 text-black active:bg-cyan-800"
+                ? "bg-green-500 text-black active:bg-cyan-800"
                 : "bg-gray-300 text-gray-600 cursor-not-allowed"
             }`}
           >

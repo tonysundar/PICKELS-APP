@@ -14,7 +14,7 @@ const Navbar = () => {
     
     }
   return (
-    <div className='flex items-center justify-between py-5 font-medium '>
+    <div className='flex items-center justify-between mb-3 p-2 font-medium navbarbg '>
      <Link to='/'> <img src={assets.picklelogo} className='w-20' alt=''/></Link>
        <ul className='hidden sm:flex gap-5 text-sm text-gray-700 '>
         <NavLink to='/' className='flex flex-col items-center gap-1'>
@@ -22,7 +22,7 @@ const Navbar = () => {
          <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
         </NavLink>
         <NavLink to='/Pickles' className='flex flex-col items-center gap-1'>
-         <p>SHOP</p>
+         <p>PICKLES</p>
          <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
         </NavLink>
         <NavLink to='/About' className='flex flex-col items-center gap-1'>

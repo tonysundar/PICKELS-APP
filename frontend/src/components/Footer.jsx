@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <div>
-      <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
+    <div className='footerbg'>
+      <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm p-4 rounded'>
              <div>
                 <Link to='/'> <img src={assets.picklelogo} alt='' className='mb-5 w-20 h-15'/></Link>
                   <p className='w-full md:w-2/3 text-gray-600'>
@@ -15,8 +15,8 @@ const Footer = () => {
              <div>
                 <p className='text-xl font-medium mb-5'>OUR STORE</p>
                 <ul className='flex flex-col gap-1 text-gray-600'>
-                 <li>Home</li>
-                 <li>About us</li>
+              <Link to='/'> <li>Home</li></Link>
+              <Link to='/About'> <li>About us</li></Link>
                  <li>Delivery</li>
                  <li>Privacy & Policy</li>
                 </ul>
