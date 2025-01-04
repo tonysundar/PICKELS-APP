@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { NavLink,Link } from 'react-router-dom'
 import { ShopeContext } from '../context/ShopContext';
-import { set } from 'mongoose';
+
 const Navbar = () => {
   const[visible,setVisible] = useState(false);
   const {setShowsearch,getCartCount,navigate,token,setToken,setCartItems} = useContext(ShopeContext)
