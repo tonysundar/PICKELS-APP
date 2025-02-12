@@ -64,9 +64,10 @@ const onSubmitHandler = async (event) => {
                        if(response.data.success){
                           setCartItems({})
                           navigate('/orders')
+                          toast.success(response.data.message);
                        }
                        else{
-                          toast.error(response.data.message)
+                          toast.error(response.data.message);
                        }
 
               break;

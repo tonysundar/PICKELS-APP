@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { ShopeContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
+import { toast } from 'react-toastify';
+
 
 const Product = () => {
   const { ProductId } = useParams();
+  const navigate = useNavigate();
+  const keepShoping = useNavigate();
   const { products, currency, addToCart } = useContext(ShopeContext);
 
   const [productData, setProductData] = useState(null);
@@ -35,6 +39,17 @@ const Product = () => {
   useEffect(() => {
     fetchProductData();
   }, [ProductId]);
+
+ const handleAddToCart = () => {
+    addToCart(productData._id, size);
+    toast.success("Product added to cart!");
+  };
+  const handleToGOcart = () => {
+    navigate('/Cart')   }
+
+  const handleKeepShoping = () => {
+    keepShoping('/Pickles')  
+    }
 
   return productData ? (
     <div className="border-t-2 pt-10">
@@ -79,17 +94,23 @@ const Product = () => {
           </div>
 
           {/* Add to Cart Button */}
-          <button
-            onClick={() => addToCart(productData._id, size)}
+          <div className="flex flex-col gap-4">
+          <button onClick={handleAddToCart}
+           
             // Disable button if no size is selected
             className={`px-8 py-3 ${
               size
-                ? "bg-green-500 text-black active:bg-cyan-800"
+                ? "bg-green-500 text-black active:bg-cyan-800 w-1/2"
                 : "bg-gray-300 text-gray-600 cursor-not-allowed"
             }`}
           >
-            ADD TO CART
+            ADD TO CART 
           </button>
+           <div>
+            <button onClick={handleKeepShoping} className="bg-yellow-400 p-3 text-black m-4 rounded">Keep Shoping</button>
+            <button onClick={handleToGOcart} className="bg-yellow-400 p-3 text-black m-4 rounded">Go To Cart</button>
+            </div>
+            </div>
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original Product</p>
