@@ -3,6 +3,7 @@ import { ShopeContext } from '../context/ShopContext';
 import Tittle from '../components/Tittle';
 import { assets } from '../assets/assets';
 import CartTotal from '../components/CartTotal';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopeContext);
@@ -86,11 +87,17 @@ const Cart = () => {
 
                 {/* Remove button */}
                 <img 
-                  onClick={() => updateQuantity(item.id, item.size, 0)} 
-                  className="w-4 mr-4 sm:w-5 cursor-pointer" 
-                  src={assets.bin_icon} 
-                  alt="Remove" 
-                />
+  onClick={() => {
+    updateQuantity(item.id, item.size, 0);
+    toast.success(`${productData.name} removed from cart!`,{
+      theme: "colored",
+      style: { backgroundColor: "#f8d7da", color: "#721c24" }
+    })}}
+  className="w-4 mr-4 sm:w-5 cursor-pointer" 
+  src={assets.bin_icon} 
+  alt="Remove" 
+/>
+
               </div>
             );
           })

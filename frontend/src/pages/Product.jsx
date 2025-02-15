@@ -107,8 +107,8 @@ const Product = () => {
             ADD TO CART 
           </button>
            <div>
-            <button onClick={handleKeepShoping} className="bg-yellow-400 p-3 text-black m-4 rounded">Keep Shoping</button>
-            <button onClick={handleToGOcart} className="bg-yellow-400 p-3 text-black m-4 rounded">Go To Cart</button>
+            <button onClick={handleKeepShoping} className="ml-0 gap-4 bg-yellow-400 p-3 text-black m-4 rounded">Keep Shoping</button>
+            <button onClick={handleToGOcart} className=" bg-yellow-400 p-3 text-black m-4 rounded">Go To Cart</button>
             </div>
             </div>
           <hr className="mt-8 sm:w-4/5" />

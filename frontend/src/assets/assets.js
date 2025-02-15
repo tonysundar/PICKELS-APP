@@ -21,7 +21,13 @@ import star_icon from './star_icon.png'
 import bin_icon from './bin_icon.png'
 import stripe_logo from './stripe_logo.png'
 import razorpay_logo from './razorpay_logo.png'
+import chaticon from './chaticon.png'
+import chaticon2 from './chaticon2.png'
+import mango from './favicon.webp'
 export const assets = {
+    mango,
+    chaticon2,
+    chaticon,
     picklelogo,
     searchlogo,
     profile,

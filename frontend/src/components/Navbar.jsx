@@ -14,8 +14,8 @@ const Navbar = () => {
     
     }
   return (
-    <div className='flex items-center justify-between mb-3 p-2 font-medium navbarbg '>
-     <Link to='/'> <img src={assets.picklelogo} className='w-20' alt=''/></Link>
+    <div className='flex items-center justify-between mb-3 p-1 font-medium navbarbg '>
+     <Link to='/'> <img src={assets.mango} className='w-20 h-20  rounded-full object-cover' alt=''/></Link>
        <ul className='hidden sm:flex gap-5 text-sm text-gray-700 '>
         <NavLink to='/' className='flex flex-col items-center gap-1'>
          <p>HOME</p>
