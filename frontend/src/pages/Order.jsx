@@ -6,41 +6,49 @@ import Tittle from '../components/Tittle';
 const Order = () => {
   const { backendUrl, token, currency } = useContext(ShopeContext);
   const [orderData, setOrderData] = useState([]);
-
+  
   const loadOrderData = async () => {
     try {
-      if (!token) {
-        console.log("No token found.");
-        return; // Don't proceed if there's no token
-      }
+      
+        const userId = localStorage.getItem("userId"); // ✅ Get userId from localStorage
+        if (!userId || !token) {
+            console.log("No userId or token found.");
+            return;
+        }
 
-      const response = await axios.post(`https://pickels-app-1.onrender.com/api/order/userorders`, {}, {
-        headers: { token }
-      });
+        const response = await axios.post(
+            `https://pickels-app-1.onrender.com/api/order/userorders`,
+            { userId },  // ✅ Send userId in request body
+            { headers: { token } }
+        );
 
-      if (response.data.success) {
-        let allOrders = [];
-        response.data.orders.forEach(order => {
-          order.items.forEach(item => {
-            item['status'] = order.status;
-            item['payment'] = order.payment;
-            item['paymentMethod'] = order.paymentMethod; // Correct key
-            item['date'] = order.date;
-            allOrders.push(item);
-          });
-        });
-        setOrderData(allOrders.reverse()); // Reverse the order for latest first
-      } else {
-        console.log("No successful response.");
-      }
+        if (response.data.success && response.data.orders.length > 0) {
+            let allOrders = [];
+            response.data.orders.forEach(order => {
+                order.items.forEach(item => {
+                    item['status'] = order.status;
+                    item['payment'] = order.payment;
+                    item['paymentMethod'] = order.paymentMethod;
+                    item['date'] = order.date;
+                    allOrders.push(item);
+                });
+            });
+            setOrderData(allOrders.reverse());
+        } else {
+            console.log("No orders found.");
+            setOrderData([]);
+        }
     } catch (error) {
-      console.error("Error fetching order data:", error);
+        console.error("Error fetching order data:", error);
     }
-  };
+};
 
-  useEffect(() => {
+useEffect(() => {
     loadOrderData();
-  }, [token]);
+}, [token]);
+
+ 
+
 
   return (
     <div className="border-t pt-16">

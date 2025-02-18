@@ -16,7 +16,9 @@ const ShopeContextProvider = (props) => {
     const [cartItems, setCartItems]=useState({});
     const [products,setProducts] = useState([]);
     const [token,setToken] = useState("");
+    
     const navigate = useNavigate();
+
 
     const addToCart = async (itemId,size) =>{
 
@@ -108,7 +110,7 @@ const ShopeContextProvider = (props) => {
         try {
             
             const response = await axios.get("https://pickels-app-1.onrender.com" + '/api/product/list')
-         
+                
              if(response.data.success){
                
                 setProducts(response.data.products)
@@ -123,17 +125,31 @@ const ShopeContextProvider = (props) => {
      }
 
      const getUserCart = async (token) => {
-            try {
-              const response =  await axios.post("https://pickels-app-1.onrender.com" + '/api/cart/get',{}, {headers:{token}})
-                if(response.data.success){
-                    setCartItems(response.data.cartData)
+        try {
+            const response = await axios.post(
+                backendUrl + '/api/cart/get', 
+                {}, 
+                { headers: { token } }
+            );
+    
+            if (response.data.success) {
+                setCartItems(response.data.cartData);
+    
+                // Save userId in localStorage
+                if (response.data.userId) {
+                    localStorage.setItem("userId", response.data.userId);
+                    setUserId(response.data.userId);
                 }
-            } catch (error) {
-                console.log(error)
-                toast.error(error.message)
             }
-     }
-
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+    };
+    
+    
+    
+     
      useEffect(()=>{
         getProductsData();
      },[])

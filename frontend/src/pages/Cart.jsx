@@ -13,8 +13,7 @@ const Cart = () => {
     const tempData = [];
 
     // Log to verify cartItems and products
-    console.log("Cart items:", cartItems);
-    console.log("Products list:", products);
+   
 
     // Map through cartItems to extract relevant data
     Object.entries(cartItems).forEach(([productId, sizes]) => {

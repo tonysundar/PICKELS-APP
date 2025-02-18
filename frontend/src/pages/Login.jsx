@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 
 const Login = () => {
   const [currentState, setCurrentState] = useState('Login')
-  const { token, setToken, navigate, backendUrl } = useContext(ShopeContext)
+  const { token, setToken, navigate, backendUrl} = useContext(ShopeContext)
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -14,37 +14,38 @@ const Login = () => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      let response; // Declare response here
-
+      let response;
+  
       if (currentState === 'Sign Up') {
         console.log("Attempting to sign up...");
         response = await axios.post("https://pickels-app-1.onrender.com/api/user/register", { name, email, password });
-
-
+  
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
-          toast.success(response.data)
+          localStorage.setItem('userId', response.data.user._id); // ✅ Store userId
+          toast.success(response.data.message);
         } else {
-          toast.error(response.data);
+          toast.error(response.data.message);
         }
       } else {
         response = await axios.post("https://pickels-app-1.onrender.com/api/user/login", { email, password });
+  
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userId', response.data.user._id);
         } else {
-          console.log(response)
+          console.log(response);
           toast.error(response.data.message);
         }
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message
-      );
+      toast.error(error.response.data.message);
     }
   };
-
+  
   useEffect(() => {
     if (token) {
       navigate('/')

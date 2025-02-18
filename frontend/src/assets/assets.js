@@ -23,7 +23,7 @@ import stripe_logo from './stripe_logo.png'
 import razorpay_logo from './razorpay_logo.png'
 import chaticon from './chaticon.png'
 import chaticon2 from './chaticon2.png'
-import mango from './favicon.webp'
+import mango from './favicon.ico'
 export const assets = {
     mango,
     chaticon2,

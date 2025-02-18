@@ -59,24 +59,26 @@ const updateCart = async (req,res) => {
 
 }
 //get user cart data
-const getUserCart = async (req,res) => {
-
+const getUserCart = async (req, res) => {
     try {
+        const { userId } = req.body;
 
-        const {userId} = req.body
+        // Validate user existence
+        const userData = await userModel.findById(userId);
+        if (!userData) {
+            return res.json({ success: false, message: "User not found" });
+        }
 
-        const userData = await userModel.findById(userId)
-        let cartData = await userData.cartData;
+        let cartData = userData.cartData;
 
-        res.json({success:true,cartData});
+        //  Return `userId` in the response
+        res.json({ success: true, cartData, userId });
 
-        
     } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
-        
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
+};
 
-}
 
 export {addToCart, updateCart,getUserCart}

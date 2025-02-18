@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react'
+import React,{useContext, useState,useEffect} from 'react'
 import Tittle from '../components/Tittle'
 import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
@@ -9,12 +9,12 @@ import axios from 'axios'
 
 const Placeorder = () => {
   const [method, setMethod] =  useState('cod');
-  const {navigate,backendUrl,token,cartItems,setCartItems,getCartAmount,delivery_fee,products} = useContext(ShopeContext);
+  const {navigate,backendUrl,token,cartItems,setCartItems,getCartAmount,delivery_fee,products,user} = useContext(ShopeContext);
    
   const [formData,setFormData] = useState({
     firstName:'',
     lastName:'',
-    email:'',
+    email: user?.email || '',
     street:'',
     city:'',
     state:'',
@@ -22,7 +22,12 @@ const Placeorder = () => {
     country:'',
     phone:''
 })
-
+// Update email if user logs in after initial render
+useEffect(() => {
+  if (user?.email) {
+    setFormData(prevData => ({ ...prevData, email: user.email }));
+  }
+}, [user]);
 const onChangeHandler = (event) => {
   const name = event.target.name;
   const value = event.target.value

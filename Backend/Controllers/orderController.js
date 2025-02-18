@@ -96,7 +96,7 @@ const placeOrderStripe = async (req, res) => {
       await newOrder.save();
   
       const session = await stripe.checkout.sessions.create({
-        success_url: `${origin}/verify?success=true&orderId=${newOrder._id}`,
+        success_url: `${origin}/orders?success=true&orderId=${newOrder._id}`,
         cancel_url: `${origin}/verify?success=false&orderId=${newOrder._id}`,
         line_items,
         mode: "payment",
@@ -149,19 +149,24 @@ const allOrders = async (req,res) => {
 }
 
 //User Order Data for Frontend
-const userOrders = async (req,res) => {
-    try {
-        const {userId} = req.body
-        
-         const orders = await orderModel.find({userId})
-         res.json({success:true,orders})
+const userOrders = async (req, res) => {
+  try {
+      const { userId } = req.body;
 
-    } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
-    }
+      // Fetch only paid orders and sort by latest date
+      const orders = await orderModel.find({ userId, payment: true }).sort({ date: -1 });
 
-}
+      if (!orders.length) {
+          return res.json({ success: false, message: "No orders found", orders: [] });
+      }
+
+      res.json({ success: true, orders });
+  } catch (error) {
+      console.log("Error fetching user orders:", error);
+      res.json({ success: false, message: error.message });
+  }
+};
+
 //Update Order Status from Admin Panel
 const updateStatus = async (req,res) => {
     try {

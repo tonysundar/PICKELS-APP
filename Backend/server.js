@@ -17,13 +17,14 @@ connectCloudinary();
 
 //Middlewares
 app.use(express.json());
-app.use(cors({origin:"*"}));
+app.use(cors());
 
 //API endpoints
 app.use('/api/user',userRouter);
 app.use('/api/product',ProductRouter);
 app.use('/api/cart',cartRouter);
 app.use('/api/order',orderRouter);
+
 
 
 
