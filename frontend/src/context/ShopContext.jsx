@@ -136,9 +136,8 @@ const ShopeContextProvider = (props) => {
                 setCartItems(response.data.cartData);
     
                 // Save userId in localStorage
-                if (response.data.userId) {
+                if (typeof window !== "undefined" && response.data.userId) {
                     localStorage.setItem("userId", response.data.userId);
-                    setUserId(response.data.userId);
                 }
             }
         } catch (error) {

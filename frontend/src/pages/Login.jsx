@@ -36,7 +36,7 @@ const Login = () => {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('userId', response.data.user._id);
         } else {
-          console.log(response);
+         
           toast.error(response.data.message);
         }
       }
