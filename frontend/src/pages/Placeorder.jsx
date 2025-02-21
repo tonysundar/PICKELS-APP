@@ -62,7 +62,7 @@ const onSubmitHandler = async (event) => {
         }
 
         switch(method){
-              //API call for CASH ON DELIVERY
+              /*API call for CASH ON DELIVERY
               case 'cod':
                     
                        const response = await axios.post("https://pickels-app-1.onrender.com" + '/api/order/place',orderData,{headers:{token}})
@@ -75,7 +75,7 @@ const onSubmitHandler = async (event) => {
                           toast.error('select payment');
                        }
 
-              break;
+              break;*/
 
               case 'stripe':
                     const responseStripe = await axios.post("https://pickels-app-1.onrender.com" + '/api/order/stripe',orderData,{headers:{token}})
@@ -91,6 +91,7 @@ const onSubmitHandler = async (event) => {
 
 
               default:
+                toast.error('Select PAYMENT')
                     break;
         }
         
