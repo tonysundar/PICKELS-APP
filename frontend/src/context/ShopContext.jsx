@@ -127,7 +127,7 @@ const ShopeContextProvider = (props) => {
      const getUserCart = async (token) => {
         try {
             const response = await axios.post(
-                backendUrl + '/api/cart/get', 
+               "https://pickels-app-1.onrender.com" + '/api/cart/get', 
                 {}, 
                 { headers: { token } }
             );
