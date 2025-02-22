@@ -110,7 +110,7 @@ const Cart = () => {
           <div className="w-full text-end">
             <button 
               onClick={() => navigate('/Placeorder')} 
-              className="bg-green-300 text-black text-sm my-8 px-8 py-3"
+              className="bg-green-300 text-black text-sm my-8 px-8 py-3 rounded"
             >
               CHECK OUT
             </button>
