@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
 
       // Check if the user exists
       const user = await userModel.findOne({ email });
-       console.log(user);
+      console.log(user);
       if (!user) {
          return res.status(404).json({ success: false, message: "User not found" });
       }
@@ -78,7 +78,7 @@ const registerUser = async (req, res) => {
 const adminLogin = async (req, res) => {
    try {
       const { email, password } = req.body;
-
+      console.log(email, password);
       if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
          const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "7d" }); // ✅ Fixed
          return res.json({ success: true, token });
