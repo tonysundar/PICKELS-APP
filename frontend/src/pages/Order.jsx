@@ -4,7 +4,7 @@ import { ShopeContext } from '../context/ShopContext';
 import Tittle from '../components/Tittle';
 
 const Order = () => {
-  const { backendUrl, token, currency } = useContext(ShopeContext);
+  const {  backendUrl, token, currency } = useContext(ShopeContext);
   const [orderData, setOrderData] = useState([]);
   
   const loadOrderData = async () => {
@@ -17,7 +17,7 @@ const Order = () => {
         }
 
         const response = await axios.post(
-            `https://pickels-app-1.onrender.com/api/order/userorders`,
+             backendUrl+"/api/order/userorders",
             { userId },  // ✅ Send userId in request body
             { headers: { token } }
         );
