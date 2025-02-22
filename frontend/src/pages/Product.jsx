@@ -100,7 +100,7 @@ const Product = () => {
             // Disable button if no size is selected
             className={`px-8 py-3 ${
               size
-                ? "bg-green-500 text-black active:bg-cyan-800 w-1/2"
+                ? "bg-green-500 text-black rounded active:bg-cyan-800 w-1/2"
                 : "bg-gray-300 text-gray-600 cursor-not-allowed"
             }`}
           >
