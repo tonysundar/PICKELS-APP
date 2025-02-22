@@ -88,7 +88,7 @@ const placeOrderStripe = async (req, res) => {
         address,
         amount,
         paymentMethod: "Stripe",
-        payment: false,
+        payment: true,
         date: Date.now(),
       };
   
@@ -154,7 +154,7 @@ const userOrders = async (req, res) => {
       const { userId } = req.body;
 
       // Fetch only paid orders and sort by latest date
-      const orders = await orderModel.find({ userId, payment: true }).sort({ date: -1 });
+      const orders = await orderModel.find({ userId }).sort({ date: -1 });
 
       if (!orders.length) {
           return res.json({ success: false, message: "No orders found", orders: [] });
