@@ -18,7 +18,7 @@ const Verify = () => {
                     return null
                   }
                   
-                  const response = await axios.post("https://pickels-app-1.onrender.com" + '/api/order/verifyStripe',{orderId},{headers:{token}})  
+                  const response = await axios.post(backendUrl + '/api/order/verifyStripe',{orderId},{headers:{token}})  
                   if(response.data.success){
                     setCartItems({})
                     navigate('/orders')}

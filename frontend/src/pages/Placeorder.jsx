@@ -78,7 +78,7 @@ const onSubmitHandler = async (event) => {
               break;*/
 
               case 'stripe':
-                    const responseStripe = await axios.post("https://pickels-app-1.onrender.com" + '/api/order/stripe',orderData,{headers:{token}})
+                    const responseStripe = await axios.post(backendUrl + '/api/order/stripe',orderData,{headers:{token}})
                      if(responseStripe.data.success){
                           const {session_url} = responseStripe.data
                           window.location.replace(session_url)

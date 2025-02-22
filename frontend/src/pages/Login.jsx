@@ -17,24 +17,26 @@ const Login = () => {
       let response;
   
       if (currentState === 'Sign Up') {
-        console.log("Attempting to sign up...");
-        response = await axios.post("https://pickels-app-1.onrender.com/api/user/register", { name, email, password });
+       
+        response = await axios.post(backendUrl+"/api/user/register", { name, email, password });
   
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
-          localStorage.setItem('userId', response.data.user._id); // ✅ Store userId
-          toast.success(response.data.message);
+          localStorage.setItem('userId', response.data.user._id); 
+         
+          toast.success('successfully Register');
         } else {
           toast.error(response.data.message);
         }
       } else {
-        response = await axios.post("https://pickels-app-1.onrender.com/api/user/login", { email, password });
+        response = await axios.post(backendUrl+"/api/user/login", { email, password });
   
         if (response.data.success) {
           setToken(response.data.token);
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('userId', response.data.user._id);
+          toast.success('Successfully Login')
         } else {
          
           toast.error(response.data.message);
